@@ -10,9 +10,7 @@ import SwiftUI
 struct CreateNote: View {
     @Environment(\.dismiss) private var dismiss
     @State private var content: String = ""
-    
-    // create a closure
-    let onSave: (Note) -> Void
+    @EnvironmentObject var notesStore: NotesStore
     
     var body: some View {
         NavigationStack {
@@ -31,7 +29,7 @@ struct CreateNote: View {
                             let note = Note(
                                 id: Int.random(in: 10...99), content: content, createdAt: .now
                             )
-                            onSave(note)
+                            notesStore.add(note: note)
                             dismiss()
                         } label: {
                             Text("Save")

@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var notes : [Note] = []
+    @StateObject var notesStore = NotesStore()
     
     var body: some View {
         NavigationStack {
             // content list
-            HomeView(notes: notes)
+            HomeView(notes: notesStore.notes)
             .navigationTitle("My Notes")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     NavigationLink {
-                        CreateNote(
-                            onSave: {
-                                note in notes.append(note)
-                            }
-                        )
+                        CreateNote().environmentObject(notesStore)
                     } label: {
                         Image(systemName: "plus")
                     }
