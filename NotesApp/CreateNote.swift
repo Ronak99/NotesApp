@@ -13,24 +13,36 @@ struct CreateNote: View {
     @Environment(\.modelContext) private var modelContext
     @State private var content: String = ""
     
+    let note: Note?
+    
+    init(note: Note? = nil) {
+        self.note = note
+        _content = State(initialValue: note?.content ?? "")
+    }
+    
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section(
-                    header: Text("Write a note")
+                    header: Text(note == nil ? "Write a note" : "Update your current note")
                 ) {
                     TextEditor(
                         text: $content
                     )
                 }
-            }.navigationTitle("Create")
+            }.navigationTitle(note == nil ? "Create" : "Update")
                 .toolbar {
                     ToolbarItem {
                         Button {
-                            let note = Note(
-                                id: Int.random(in: 10...99), content: content, createdAt: .now
-                            )
-                            modelContext.insert(note)
+                            if note == nil {
+                                let note = Note(
+                                    id: Int.random(in: 10...99), content: content, createdAt: .now
+                                )
+                                modelContext.insert(note)
+                            } else {
+                                note!.updateContent(content: content)
+                            }
                             
                             dismiss()
                         } label: {
@@ -41,6 +53,8 @@ struct CreateNote: View {
         }
     }
 }
+
+
 
 //#Preview {
 //    CreateNote()

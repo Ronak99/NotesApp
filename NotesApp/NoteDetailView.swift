@@ -15,12 +15,22 @@ struct NoteDetailView: View  {
     }
     
     var body: some View {
-        VStack {
-            Text(note.content)
+        NavigationStack {
+            VStack {
+                Text(note.content)
+            }.toolbar {
+                ToolbarItem(placement: .automatic, content: {
+                    NavigationLink {
+                        CreateNote(note: note)
+                    } label: {
+                        Text("Edit")
+                    }
+                })
+            }
         }
     }
 }
 
-#Preview {
-    NoteDetailView(note: Note(id: 1, content: "Sample Content", createdAt: .now))
-}
+//#Preview {
+//    NoteDetailView(note: Note(id: 1, content: "Sample Content", createdAt: .now))
+//}
