@@ -24,6 +24,6 @@ struct NoteListItem: View {
     }
 }
 
-#Preview {
-    NoteListItem(note: MockData.testNotes.first!)
-}
+//#Preview {
+//    NoteListItem(note: MockData.testNotes.first!)
+//}

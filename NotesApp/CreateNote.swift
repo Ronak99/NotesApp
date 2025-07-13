@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CreateNote: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var content: String = ""
-    @EnvironmentObject var notesStore: NotesStore
     
     var body: some View {
         NavigationStack {
@@ -29,7 +30,8 @@ struct CreateNote: View {
                             let note = Note(
                                 id: Int.random(in: 10...99), content: content, createdAt: .now
                             )
-                            notesStore.add(note: note)
+                            modelContext.insert(note)
+                            
                             dismiss()
                         } label: {
                             Text("Save")

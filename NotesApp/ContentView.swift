@@ -6,19 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @StateObject var notesStore = NotesStore()
+    @Query var notes: [Note]
     
     var body: some View {
         NavigationStack {
             // content list
-            HomeView(notes: notesStore.notes)
+            HomeView(notes: notes)
             .navigationTitle("My Notes")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     NavigationLink {
-                        CreateNote().environmentObject(notesStore)
+                        CreateNote()
                     } label: {
                         Image(systemName: "plus")
                     }

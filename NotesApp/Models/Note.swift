@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Note: Hashable, Identifiable {
-    let id: Int
-    let content: String
-    let createdAt: Date
+@Model
+class Note {
+    var id: Int
+    var content: String
+    var createdAt: Date
     
     init(id: Int, content: String, createdAt: Date) {
         self.id = id
@@ -18,3 +20,5 @@ struct Note: Hashable, Identifiable {
         self.createdAt = createdAt
     }
 }
+
+
