@@ -8,14 +8,52 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var notes : [Note] = []
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            // content list
+            HomeView(notes: notes)
+            .navigationTitle("My Notes")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    NavigationLink {
+                        CreateNote(
+                            onSave: {
+                                note in notes.append(note)
+                            }
+                        )
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
-        .padding()
+    }
+}
+
+struct HomeView: View {
+    let notes: [Note]
+    
+    init(notes: [Note]) {
+        self.notes = notes
+    }
+    
+    var body: some View {
+        if notes.isEmpty {
+            VStack (spacing: 8,) {
+                Text("Welcome").font(.largeTitle)
+                Text("Create your first note by tapping the + icon").font(.subheadline)
+            }
+        } else {
+            List(notes) { note in
+                NavigationLink {
+                    NoteDetailView(note: note)
+                } label: {
+                    NoteListItem(note: note)
+                }
+            }
+        }
     }
 }
 

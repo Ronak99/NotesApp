@@ -7,10 +7,11 @@
 import SwiftUI
 
 @main
-struct Ronak: App {
+struct NotesApp: App {
     var body: some Scene {
         WindowGroup() {
             ContentView()
         }
     }
 }
+
