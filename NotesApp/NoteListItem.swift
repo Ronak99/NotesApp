@@ -15,11 +15,15 @@ struct NoteListItem: View {
     }
     
     var body: some View {
-        VStack (
-            alignment: .leading,
-        ) {
-            Text(note.content).lineLimit(2).font(.title3)
-            Text(note.createdAt.formatted()).font(.subheadline)
+        NavigationLink {
+            NoteDetailView(note: note)
+        } label: {
+            VStack (
+                alignment: .leading,
+            ) {
+                Text(note.content).lineLimit(2).font(.title3)
+                Text(note.createdAt.formatted()).font(.subheadline)
+            }
         }
     }
 }
