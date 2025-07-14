@@ -31,7 +31,7 @@ struct Preview {
  
 #Preview {
     let preview = Preview()
-    let _ = preview.addSamples(Note.sampleItems)
+    let _ = preview.addSamples([Note(content: "String", createdAt: .now)])
     ContentView()
         .modelContainer(preview.modelContainer)
 }

@@ -10,18 +10,23 @@ import SwiftData
 
 @Model
 class Note {
-    var id: Int
     private(set) var content: String
-    var createdAt: Date
+    private(set) var createdAt: Date
     
-    init(id: Int, content: String, createdAt: Date) {
-        self.id = id
+    @Attribute(.externalStorage)
+    private(set) var noteCover: Data?
+    
+    init(content: String, createdAt: Date) {
         self.content = content
         self.createdAt = createdAt
     }
     
     func updateContent(content: String) {
         self.content = content
+    }
+    
+    func updateNoteCover(data: Data?) {
+        self.noteCover = data
     }
 }
 

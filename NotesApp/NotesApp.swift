@@ -15,4 +15,3 @@ struct NotesApp: App {
         }.modelContainer(for: Note.self)
     }
 }
-
