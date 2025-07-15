@@ -23,29 +23,29 @@ struct NoteDetailView: View  {
     
     var body: some View {
         NavigationStack {
-            VStack {
-
+            VStack(alignment: .leading) {
                 if let noteCover = note.noteCover,
                    let uiImage = UIImage(data: noteCover) {
                     Image(
                         uiImage: uiImage
                     )
-                    .aspectRatio(
-                        contentMode: .fit
+                    .resizable(
+                        resizingMode: .stretch
                     )
-                    .frame(
-                        width: 350,
-                        height: 350,
-                        alignment: .center,
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .frame(height: 350)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
                     .clipped()
                 }
                 
                 Text(note.content)
-                
+                    .frame(
+                    maxWidth: .infinity,
+                    alignment: .leading
+                )
                 Spacer()
-            }.toolbar {
+            }
+            .padding()
+            .toolbar {
                 ToolbarItem(placement: .automatic, content: {
                     NavigationLink {
                         CreateNote(note: note)
@@ -59,5 +59,5 @@ struct NoteDetailView: View  {
 }
 
 #Preview {
-    NoteDetailView(note: Note(content: "Sample Content", createdAt: .now))
+    NoteDetailView(note: Note(content: "Sample Content 2", createdAt: .now))
 }
